@@ -4,7 +4,6 @@ let score0 = document.getElementById("score--0");
 let score1 = document.getElementById("score--1");
 let image = document.querySelector(".dice");
 let active = document.querySelector(".player--active");
-
 let btnNew = document.querySelector(".btn--new");
 let btnHold = document.querySelector(".btn--hold");
 let btnRoll = document.querySelector(".btn--roll");
@@ -14,13 +13,25 @@ let player1 = document.querySelector(".player--1");
 let currentPlayer1 = document.getElementById("current-0");
 let currentPlayer2 = document.getElementById("current-1");
 
-image.classList.add("hidden");
+let currentScore, scores, activePlayer;
 
-let currentScore = 0;
-const scores = [0, 0];
-let activePlayer = 0;
-score0.textContent = 0;
-score1.textContent = 0;
+const init = function () {
+  currentScore = 0;
+  scores = [0, 0];
+  activePlayer = 0;
+  currentPlayer1.textContent = 0;
+  currentPlayer2.textContent = 0;
+  score0.textContent = 0;
+  score1.textContent = 0;
+  image.classList.add("hidden");
+  player0.classList.remove("player--winner");
+  player1.classList.remove("player--winner");
+  player0.classList.add("player--active");
+  player1.classList.remove("player--active");
+  btnHold.style.pointerEvents = "pointer";
+  btnRoll.style.pointerEvents = "pointer";
+};
+init();
 
 const switchPlayer = function () {
   document.getElementById(`current-${activePlayer}`).textContent = 0;
@@ -59,4 +70,7 @@ btnHold.addEventListener("click", function () {
   } else {
     switchPlayer();
   }
+});
+btnNew.addEventListener("click", function () {
+  init();
 });
